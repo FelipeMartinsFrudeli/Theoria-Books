@@ -132,6 +132,29 @@ When adding a route:
 
 All current data is mock data.
 
+## Future Backend Rules
+
+When backend work starts, use:
+
+- NestJS
+- Passport with JWT authentication
+- TypeORM
+
+Backend modules should be organized by domain, such as:
+
+- users
+- auth
+- books
+- notes
+- highlights
+- tasks
+- study groups
+- reading sessions
+
+The backend may sync app metadata, reading progress, notes when explicitly enabled, tasks, groups, XP, streaks, and achievements.
+
+The backend must never receive, upload, store, index, or parse PDF binary content or full PDF text.
+
 Allowed persistence:
 
 - mock access token in `localStorage`
@@ -141,6 +164,7 @@ Forbidden persistence:
 
 - PDF binary data
 - full PDF text
+- uploaded PDF files on the server
 - private note content unless explicitly implementing a sync opt-in feature
 
 PDF import rules:
@@ -149,3 +173,15 @@ PDF import rules:
 - detect page count locally
 - persist only metadata and browser-visible file reference
 - use a session-only object URL for immediate embedded reading
+
+Backend PDF metadata may include only:
+
+- title
+- total pages
+- current page
+- progress metadata
+- browser-visible local file name/reference
+- file size
+- imported date
+- `sourceType: 'pdf'`
+- `localOnlyFile: true`

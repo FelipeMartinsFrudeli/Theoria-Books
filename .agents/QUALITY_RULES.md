@@ -53,8 +53,12 @@ These rules are mandatory for every code change.
 ## Local-First PDF Rules
 
 - Never upload PDF files.
+- Never upload PDF files to a backend server.
+- Never create a backend endpoint that accepts PDF binary uploads.
 - Never store PDF binary data in localStorage.
+- Never store PDF binary data on the server.
 - Never parse or persist full PDF text.
+- Never send full PDF text to the server.
 - Page count detection must happen in browser memory.
 - Persist only metadata:
   - title
@@ -68,6 +72,8 @@ These rules are mandatory for every code change.
   - `localOnlyFile: true`
 - Use session-only `URL.createObjectURL(file)` for embedded reading.
 - If the page reloads and the object URL is gone, ask the user to select the PDF again.
+
+When implementing the future NestJS backend, only sync PDF tracking metadata. Do not add file upload interceptors, multipart PDF handlers, object storage integration, or PDF text extraction unless the project rules are explicitly changed first.
 
 ## Copywriting
 
@@ -94,4 +100,3 @@ Avoid:
 - Do not introduce broad refactors during narrow UI requests.
 - Do not add abstractions unless they remove real duplication or clarify domain boundaries.
 - Do not change package versions unless needed.
-
